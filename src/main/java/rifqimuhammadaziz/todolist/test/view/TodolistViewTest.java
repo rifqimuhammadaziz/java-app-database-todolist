@@ -1,10 +1,11 @@
 package rifqimuhammadaziz.todolist.test.view;
 
-import repository.TodolistRepository;
-import repository.TodolistRepositoryImpl;
-import service.TodolistService;
-import service.TodolistServiceImpl;
-import view.TodolistView;
+
+import rifqimuhammadaziz.todolist.repository.TodolistRepository;
+import rifqimuhammadaziz.todolist.repository.TodolistRepositoryImpl;
+import rifqimuhammadaziz.todolist.service.TodolistService;
+import rifqimuhammadaziz.todolist.service.TodolistServiceImpl;
+import rifqimuhammadaziz.todolist.view.TodolistView;
 
 public class TodolistViewTest {
 

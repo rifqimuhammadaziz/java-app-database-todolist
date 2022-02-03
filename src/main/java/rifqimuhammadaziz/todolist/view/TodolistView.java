@@ -1,7 +1,7 @@
 package rifqimuhammadaziz.todolist.view;
 
-import service.TodolistService;
-import util.InputUtil;
+import rifqimuhammadaziz.todolist.service.TodolistService;
+import rifqimuhammadaziz.todolist.util.InputUtil;
 
 public class TodolistView {
 
