@@ -1,7 +1,7 @@
 package rifqimuhammadaziz.todolist.service;
 
-import entity.Todolist;
-import repository.TodolistRepository;
+import rifqimuhammadaziz.todolist.entity.Todolist;
+import rifqimuhammadaziz.todolist.repository.TodolistRepository;
 
 public class TodolistServiceImpl implements TodolistService {
 

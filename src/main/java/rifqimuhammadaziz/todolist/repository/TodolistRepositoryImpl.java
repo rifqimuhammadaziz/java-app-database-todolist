@@ -1,6 +1,6 @@
 package rifqimuhammadaziz.todolist.repository;
 
-import entity.Todolist;
+import rifqimuhammadaziz.todolist.entity.Todolist;
 
 public class TodolistRepositoryImpl implements TodolistRepository {
 

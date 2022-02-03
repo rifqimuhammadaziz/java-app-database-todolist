@@ -1,10 +1,11 @@
 package rifqimuhammadaziz.todolist.test.service;
 
-import entity.Todolist;
-import repository.TodolistRepository;
-import repository.TodolistRepositoryImpl;
-import service.TodolistService;
-import service.TodolistServiceImpl;
+import rifqimuhammadaziz.todolist.entity.Todolist;
+import rifqimuhammadaziz.todolist.repository.TodolistRepository;
+import rifqimuhammadaziz.todolist.repository.TodolistRepositoryImpl;
+import rifqimuhammadaziz.todolist.service.TodolistService;
+import rifqimuhammadaziz.todolist.service.TodolistServiceImpl;
+
 
 public class TodolistServiceTest {
 
