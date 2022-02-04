@@ -56,7 +56,7 @@ public class TodolistView {
         System.out.println("REMOVE TODOLIST");
         System.out.println("---------------");
 
-        var number = InputUtil.input("Choose Number Todo (x to cancel)");
+        var number = InputUtil.input("Choose ID Todo (x to cancel)");
 
         if (number.equals("x")) {
             showTodolist();
