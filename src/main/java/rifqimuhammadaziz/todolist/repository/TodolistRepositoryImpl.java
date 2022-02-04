@@ -27,7 +27,7 @@ public class TodolistRepositoryImpl implements TodolistRepository {
             List<Todolist> list = new ArrayList<>();
             while (resultSet.next()) {
                 Todolist todolist = new Todolist();
-                todolist.setId(resultSet.getInt(" id"));
+                todolist.setId(resultSet.getInt("id"));
                 todolist.setTodo(resultSet.getString("todo"));
 
                 list.add(todolist);
