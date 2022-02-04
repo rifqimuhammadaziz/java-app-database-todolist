@@ -28,6 +28,15 @@ public class TodolistRepositoryImplTest {
         todolistRepository.add(todolist);
     }
 
+    @Test
+    void testRemove() {
+        System.out.println(todolistRepository.remove(1));
+        System.out.println(todolistRepository.remove(2));
+        System.out.println(todolistRepository.remove(3));
+    }
+
+
+
     @AfterEach
     void tearDown() {
         dataSource.close();
