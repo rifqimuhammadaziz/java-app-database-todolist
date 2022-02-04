@@ -5,6 +5,7 @@ import rifqimuhammadaziz.todolist.entity.Todolist;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TodolistRepositoryImpl implements TodolistRepository {
@@ -29,7 +30,7 @@ public class TodolistRepositoryImpl implements TodolistRepository {
         // auto closed (with try resource)
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)){
-            
+
             statement.setString(1, todolist.getTodo());
             statement.executeUpdate();
         } catch (SQLException exception) {
@@ -37,21 +38,42 @@ public class TodolistRepositoryImpl implements TodolistRepository {
         }
     }
 
-    @Override
-    public boolean remove(Integer number) {
-        if ((number -1 ) >= data.length) {
-            return false;
-        } else if (data[number -1] == null) {
-            return false;
-        } else {
-            for (int i = (number - 1); i < data.length; i++) {
-                if (i == (data.length - 1)) {
-                    data[i] = null;
+    private boolean isDataExists(Integer number) {
+        String sql = "SELECT id FROM todolist WHERE id = ?";
+        try (Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+            statement.setInt(1, number);
+
+            try (ResultSet resultSet = statement.executeQuery()){
+                if (resultSet.next()) {
+                    return true;
                 } else {
-                    data[i] = data[i + 1];
+                    return false;
                 }
             }
-            return true;
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public boolean remove(Integer number) {
+        // checking data
+        if (isDataExists(number)) {
+            // Delete data
+            String sql = "DELETE FROM todolist WHERE id = ?";
+            try (Connection connection = dataSource.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(sql)) {
+
+                statement.setInt(1, number);
+                statement.executeUpdate();
+                return true;
+            } catch (SQLException exception) {
+                throw new RuntimeException(exception);
+            }
+        } else {
+            System.out.println("Data not found!");
+            return false;
         }
     }
 
