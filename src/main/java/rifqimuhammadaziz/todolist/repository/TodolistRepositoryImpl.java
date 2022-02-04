@@ -3,14 +3,11 @@ package rifqimuhammadaziz.todolist.repository;
 import rifqimuhammadaziz.todolist.entity.Todolist;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TodolistRepositoryImpl implements TodolistRepository {
-
-    public Todolist[] data = new Todolist[10];
 
     private DataSource dataSource;
 
@@ -20,7 +17,27 @@ public class TodolistRepositoryImpl implements TodolistRepository {
 
     @Override
     public Todolist[] getAll() {
-        return data;
+        // get data from database
+        String sql = "SELECT id, todo FROM todolist";
+        try (Connection connection = dataSource.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)){ // transform to result set
+
+            // iterate result set & insert to ArrayList
+            List<Todolist> list = new ArrayList<>();
+            while (resultSet.next()) {
+                Todolist todolist = new Todolist();
+                todolist.setId(resultSet.getInt(" id"));
+                todolist.setTodo(resultSet.getString("todo"));
+
+                list.add(todolist);
+            }
+
+            // convert list toArray
+            return list.toArray(new Todolist[]{});
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
@@ -72,32 +89,9 @@ public class TodolistRepositoryImpl implements TodolistRepository {
                 throw new RuntimeException(exception);
             }
         } else {
-            System.out.println("Data not found!");
+            System.out.print("Data not found! ");
             return false;
         }
     }
 
-    public boolean isTodolistFull() {
-        // checking array is full
-        var isFull = true;
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] == null) {
-                isFull = false;
-                break;
-            }
-        }
-        return isFull;
-    }
-
-    public void resizeArrayIsFull() {
-        // Check model isFull?
-        if (isTodolistFull()) {
-            var temp = data;
-            data = new Todolist[data.length * 2];
-
-            for (int i = 0; i < temp.length; i++) {
-                data[i] = temp[i];
-            }
-        }
-    }
 }
